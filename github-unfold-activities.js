@@ -14,7 +14,7 @@
     // Your code here...
     var timer = setInterval(() => {
         var cnt = 0;
-        document.querySelectorAll('button[aria-expanded=false]').forEach((x)=>{cnt+=1;x.click()});
+        document.querySelectorAll('button[aria-expanded=false]').forEach((x)=>{cnt+=1;if(x.previousElementSibling?.textContent.match(/release/) === null && x.previousElementSibling?.textContent.match(/follow/) === null ){x.click()}});
         if ( cnt > 1 ) {
             clearInterval(timer);
         }
