@@ -1,3 +1,4 @@
+/* global $ */
 // ==UserScript==
 // @name         Github following check
 // @namespace    http://tampermonkey.net/
@@ -7,7 +8,7 @@
 // @match        https://github.com/*
 // @icon         https://www.google.com/s2/favicons?domain=github.com
 // @grant        none
-// @require http://code.jquery.com/jquery-3.4.1.min.js
+// @require      http://code.jquery.com/jquery-3.4.1.min.js
 // ==/UserScript==
 
 (function() {
@@ -16,7 +17,8 @@
     // Your code here...
     // $.get("https://api.github.com/users/flrngel/following/kapwing").response
     if ( $(".js-user-profile-sticky-fields > h1").length ) {
-        let myusername = $("body > div.position-relative.js-header-wrapper > header > div.Header-item.position-relative.mr-0.d-none.d-md-flex > details > summary > img").attr("alt").split("@")[1]
+        let myusername = $("meta[name=user-login]").attr('content')
+        console.log(myusername)
         let username = document.location.pathname.split('/')[1]
         if ( myusername.length > 0 && username.length > 0 ) {
             $.get(`https://api.github.com/users/${username}/following/${myusername}`, function (data, status, xhr) {
